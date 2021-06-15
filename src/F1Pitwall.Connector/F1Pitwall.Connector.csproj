@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\F1Pitwall.Telemetry.Server.Kinesis\F1Pitwall.Telemetry.Server.Kinesis.csproj" />
+    <ProjectReference Include="..\F1Pitwall.Telemetry.Server\F1Pitwall.Telemetry.Server.csproj" />
+  </ItemGroup>
+
+</Project>

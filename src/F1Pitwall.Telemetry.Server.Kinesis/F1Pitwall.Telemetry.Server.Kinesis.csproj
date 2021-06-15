@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AWSSDK.Kinesis" Version="3.7.0.30" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\F1Pitwall.Models\F1Pitwall.Models.csproj" />
+    <ProjectReference Include="..\F1Pitwall.Telemetry.Server\F1Pitwall.Telemetry.Server.csproj" />
+  </ItemGroup>
+
+</Project>
