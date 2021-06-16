@@ -16,9 +16,9 @@ const Home = () => {
   useEffect(() => {
     setKey('lap')
     if (connected) {
-      //dispatch(joinSession('16587335118100295145'));
+      dispatch(joinSession('16587335118100295145'));
     } else {
-      //dispatch(connectSession());
+      dispatch(connectSession());
     }
   }, [connected, dispatch])
 

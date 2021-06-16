@@ -13,7 +13,8 @@ Console.WriteLine($"UDP server port: {port}");
 Console.WriteLine();
 
 // Create a new UDP echo server
-var server = new TelemetryServer(new PacketRecorder(Path.Combine(Environment.CurrentDirectory, "data")), new KinesisPacketHandler());
+//var server = new TelemetryServer(new PacketRecorder(Path.Combine(Environment.CurrentDirectory, "data")), new KinesisPacketHandler());
+var server = new TelemetryServer(new KinesisPacketHandler());
 
 // Start the server
 Console.Write("F1 Pitwall Telemetry Server starting...");

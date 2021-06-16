@@ -10,11 +10,15 @@ namespace F1Pitwall.Telemetry.Server.Kinesis
         public IEnumerable<Frame> CreateFrames(IEnumerable<Packet> packets, DateTime sessionTime)
         {
 
-            var header = packets.First().Header;
+            var header = packets.FirstOrDefault().Header;
+            if (header == null)
+            {
+                return Enumerable.Empty<Frame>();
+            }
             var cars = packets.OfType<PacketLapData>().FirstOrDefault()?.Cars;
             var telemetry = packets.OfType<PacketCarTelemetry>().FirstOrDefault();
             var session = packets.OfType<PacketSessionData>().FirstOrDefault();
-            if (cars == null && telemetry == null)
+            if (cars == null || telemetry == null)
             {
                 return Enumerable.Empty<Frame>();
             }
@@ -25,7 +29,8 @@ namespace F1Pitwall.Telemetry.Server.Kinesis
         {
             var frame = new Frame();
             frame.FrameId = header.FrameIdentifier;
-            frame.SessionId = header.SessionId.ToString();
+            //frame.SessionId = header.SessionId.ToString();
+            frame.SessionId = "16587335118100295145";
             frame.SessionTime = header.SessionTime;
             frame.CarIndex = index;
             frame.IsPlayer = index == header.PlayerCarIndex;

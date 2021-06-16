@@ -45,10 +45,10 @@ namespace F1Pitwall.Processor.Handlers
                 DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             });
-            using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(json)))
+            var connections = await context.GetConnections();
+            foreach (var connection in connections)
             {
-                var connections = await context.GetConnections();
-                foreach (var connection in connections)
+                using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(json)))
                 {
                     try
                     {
@@ -79,10 +79,10 @@ namespace F1Pitwall.Processor.Handlers
                 DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             });
-            using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(json)))
+            var connections = await context.GetConnections();
+            foreach (var connection in connections)
             {
-                var connections = await context.GetConnections();
-                foreach (var connection in connections)
+                using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(json)))
                 {
                     try
                     {
