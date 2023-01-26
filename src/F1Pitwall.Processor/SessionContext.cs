@@ -32,7 +32,7 @@ namespace F1Pitwall.Processor
                 if (_connections == null)
                 {
 
-                    var table = Table.LoadTable(_dynamodbClient, "f1pitwall-sessions");
+                    var table = Table.LoadTable(_dynamodbClient, Environment.GetEnvironmentVariable("WEBSOCKETAPI_TABLE") ?? "F1Pitwall-Sessions");
                     var filter = new QueryFilter("PK", QueryOperator.Equal, $"S#{Session}");
                     filter.AddCondition("SK", QueryOperator.BeginsWith, "CX#");
                     var result = table.Query(filter);

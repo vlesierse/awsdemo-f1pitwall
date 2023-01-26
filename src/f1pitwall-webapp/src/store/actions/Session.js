@@ -1,8 +1,9 @@
 import { connect, disconnect, send } from '@giantmachines/redux-websocket';
+import config from '../../AppConfig';
 
 export const connectSession = () => {
     return (dispatch) => {
-        dispatch(connect(`wss://fexjfyvwt3.execute-api.eu-west-1.amazonaws.com/production`));
+        dispatch(connect(config.websocketUrl));
     }
 }
 

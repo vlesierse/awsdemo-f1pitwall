@@ -112,7 +112,7 @@ namespace F1Pitwall.WebSocketApi
                 };
             var putItemRequest = new PutItemRequest()
             {
-                TableName = "f1pitwall-sessions",
+                TableName = Environment.GetEnvironmentVariable("WEBSOCKETAPI_TABLE") ?? "F1Pitwall-Sessions", 
                 Item = attributes
             };
             return _dynamodbClient.PutItemAsync(putItemRequest);
