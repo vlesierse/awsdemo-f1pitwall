@@ -21,7 +21,10 @@ export class F1PitwallStack extends cdk.Stack {
     var artifactsBucket = new s3.Bucket(this, 'ArtifactsBucket');
 
     // Telemetry Stream
-    const telemetryStream = new kinesis.Stream(this, 'TelemetryStream', { streamMode: kinesis.StreamMode.ON_DEMAND  });
+    const telemetryStream = new kinesis.Stream(this, 'TelemetryStream', {
+      streamName: 'F1Pitwall-TelemetryStream',
+      streamMode: kinesis.StreamMode.ON_DEMAND
+    });
 
     // Results
     const opensearch = new OpenSearch(this, 'OpenSearch');
@@ -61,6 +64,7 @@ export class F1PitwallStack extends cdk.Stack {
     );
     
     const analyticsStream = new firehose.CfnDeliveryStream(this, 'AnalyticsStream', {
+      deliveryStreamName: 'F1Pitwall-AnalyticsStream',
       deliveryStreamType: 'KinesisStreamAsSource',
       kinesisStreamSourceConfiguration: {
         kinesisStreamArn: telemetryStream.streamArn,
@@ -105,6 +109,7 @@ export class F1PitwallStack extends cdk.Stack {
 
     // Web Socket API
     const apiSessionsTable = new dynamodb.Table(this, 'WebSocketApiTable', {
+      tableName: 'F1Pitwall-WebSocketApiTable',
       sortKey: { name: 'SK', type: dynamodb.AttributeType.STRING },
       billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
       partitionKey: { name: 'PK', type: dynamodb.AttributeType.STRING },
@@ -118,6 +123,7 @@ export class F1PitwallStack extends cdk.Stack {
     });
     apiSessionsTable.grantReadWriteData(webSocketApiFunction);
     const webSocketApi = new apigateway.WebSocketApi(this, 'WebSocketApi', {
+      apiName: 'F1Pitwall-WebSocketApi',
       defaultRouteOptions: { integration: new integrations.WebSocketLambdaIntegration('DefaultIntegration', webSocketApiFunction) },
     });
     const webSocketApiStageProduction = new apigateway.WebSocketStage(this, 'WebSocketApiStageProduction', {
@@ -131,6 +137,7 @@ export class F1PitwallStack extends cdk.Stack {
     const processorFunction = new DotNetFunction(this, 'ProcessorFunction', {
       projectDir: 'src/F1Pitwall.Processor',
       environment: {
+        'WEBSOCKETAPI_TABLE': apiSessionsTable.tableName,
         'WEBSOCKETAPI_URL': webSocketApiStageProduction.callbackUrl,
       }
     });

@@ -443,3 +443,5 @@ data/*.rdf
 
 #CDK
 !/bin
+
+.npmrc

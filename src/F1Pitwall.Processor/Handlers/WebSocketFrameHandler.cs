@@ -4,6 +4,7 @@ using Amazon.Lambda.Core;
 using Amazon.Runtime;
 using F1Pitwall.Models;
 using F1Pitwall.Processor.Models;
+using System;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -20,7 +21,7 @@ namespace F1Pitwall.Processor.Handlers
         {
             _apiClient = new AmazonApiGatewayManagementApiClient(new AmazonApiGatewayManagementApiConfig
             {
-                ServiceURL = "https://fexjfyvwt3.execute-api.eu-west-1.amazonaws.com/production"
+                ServiceURL = Environment.GetEnvironmentVariable("WEBSOCKETAPI_URL"),
             });
         }
 

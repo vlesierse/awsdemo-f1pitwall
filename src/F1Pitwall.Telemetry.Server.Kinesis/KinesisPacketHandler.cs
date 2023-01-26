@@ -36,7 +36,7 @@ namespace F1Pitwall.Telemetry.Server.Kinesis
             // We are at the next frame. So we send the current frame to Kinesis
             if (_currentFrame != packet.Header.FrameIdentifier)
             {
-                var request = new PutRecordsRequest { StreamName = "f1pitwall-telemetry" };
+                var request = new PutRecordsRequest { StreamName = Environment.GetEnvironmentVariable("KINESISSTREAM_NAME") ?? "F1Pitwall-TelemetryStream" };
                 var frames = _frameFactory.CreateFrames(_framePackets, _sessionTime);
 
                 if (frames.Any())
