@@ -117,6 +117,8 @@ export class F1PitwallStack extends cdk.Stack {
     // WebSocket Api
     const webSocketApiFunction = new DotNetFunction(this, 'WebSocketApiFunction', {
       projectDir: 'src/F1Pitwall.WebSocketApi',
+      handler: 'F1Pitwall.WebSocketApi::F1Pitwall.WebSocketApi.Function::FunctionHandlerAsync',
+      timeout: cdk.Duration.seconds(10),
       environment: {
         'WEBSOCKETAPI_TABLE': apiSessionsTable.tableName,
       }
@@ -136,6 +138,8 @@ export class F1PitwallStack extends cdk.Stack {
     // Processor
     const processorFunction = new DotNetFunction(this, 'ProcessorFunction', {
       projectDir: 'src/F1Pitwall.Processor',
+      handler: 'F1Pitwall.Processor::F1Pitwall.Processor.Function::FunctionHandlerAsync',
+      timeout: cdk.Duration.seconds(10),
       environment: {
         'WEBSOCKETAPI_TABLE': apiSessionsTable.tableName,
         'WEBSOCKETAPI_URL': webSocketApiStageProduction.callbackUrl,

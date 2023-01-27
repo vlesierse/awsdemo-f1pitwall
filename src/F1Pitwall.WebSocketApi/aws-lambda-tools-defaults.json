@@ -1,0 +1,6 @@
+{
+  "configuration": "Release",
+  "function-handler": "F1Pitwall.WebSocketApi::F1Pitwall.WebSocketApi.Function::FunctionHandlerAsync",
+  "framework": "net6.0",
+  "package-type": "Zip"
+}

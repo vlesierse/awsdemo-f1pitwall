@@ -11,7 +11,7 @@ import TelemetryData from '../components/TelemetryData';
 const Home = () => {
   const [key, setKey] = useState('home');
   const dispatch = useDispatch();
-  const {connected, cars, car} = useSelector(({ session }) => session);
+  const { connected, cars, car } = useSelector(({ session }) => session);
 
   useEffect(() => {
     setKey('lap')

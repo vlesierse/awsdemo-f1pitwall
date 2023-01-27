@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "F1Pitwall.Connector": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "AWS_PROFILE": "default"
+      }
+    }
+  }
+}

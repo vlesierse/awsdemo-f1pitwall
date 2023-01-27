@@ -1,6 +1,8 @@
 ﻿using Amazon;
 using Amazon.Kinesis;
 using Amazon.Kinesis.Model;
+using Amazon.Runtime.CredentialManagement;
+using Amazon.Runtime;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,9 +23,20 @@ namespace F1Pitwall.Telemetry.Server.Kinesis
 
         public KinesisPacketHandler()
         {
-            _client = new AmazonKinesisClient(RegionEndpoint.EUWest1);
+            var credentials = GetAWSCredentials();
+            _client = credentials != null ? new(credentials) : new();
             _framePackets = new List<Packet>(3);
             _frameFactory = new FrameFactory();
+        }
+
+        private static AWSCredentials? GetAWSCredentials()
+        {
+            var chain = new CredentialProfileStoreChain();
+            if (!chain.TryGetAWSCredentials("default", out var credentials))
+            {
+                return null;
+            }
+            return credentials;
         }
 
         public void HandleAsync(Packet packet)

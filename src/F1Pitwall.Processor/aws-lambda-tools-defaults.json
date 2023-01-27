@@ -1,0 +1,6 @@
+{
+  "configuration": "Release",
+  "function-handler": "F1Pitwall.Processor::F1Pitwall.Processor.Function::FunctionHandlerAsync",
+  "framework": "net6.0",
+  "package-type": "Zip"
+}

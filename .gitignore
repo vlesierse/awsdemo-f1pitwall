@@ -437,7 +437,6 @@ $RECYCLE.BIN/
 cdk.out
 
 # AWS
-aws-lambda-tools-defaults.json
 
 data/*.rdf
 

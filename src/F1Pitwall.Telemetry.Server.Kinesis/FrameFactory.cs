@@ -10,7 +10,7 @@ namespace F1Pitwall.Telemetry.Server.Kinesis
         public IEnumerable<Frame> CreateFrames(IEnumerable<Packet> packets, DateTime sessionTime)
         {
 
-            var header = packets.FirstOrDefault().Header;
+            var header = packets.FirstOrDefault()?.Header;
             if (header == null)
             {
                 return Enumerable.Empty<Frame>();

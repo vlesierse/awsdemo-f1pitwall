@@ -1,7 +1,6 @@
 ﻿using F1Pitwall.Telemetry.Server;
 using F1Pitwall.Telemetry.Server.Kinesis;
 using System;
-using System.IO;
 
 // UDP server port
 int port = 20777;
